@@ -1,0 +1,23 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: FarsFactory
+    network: matic
+    source:
+      address: "0xb015aeb02c772f935abdf33ed6c2e150d5aac9b2"
+      abi: FarsFactory
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - PairCreated
+      abis:
+        - name: FarsFactory
+          file: ./abis/FarsFactory.json
+      eventHandlers:
+        - event: PairCreated(indexed address,indexed address,bool,address,uint256)
+          handler: handlePairCreated
+      file: ./src/fars-factory.ts
